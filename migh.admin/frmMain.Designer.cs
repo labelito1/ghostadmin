@@ -41,6 +41,7 @@
             this.txtPIN = new System.Windows.Forms.TextBox();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.btnAlbumCreator = new System.Windows.Forms.Button();
+            this.chkSubir = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnUser
@@ -93,9 +94,9 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSave.Location = new System.Drawing.Point(255, 117);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 50);
+            this.btnSave.Size = new System.Drawing.Size(75, 21);
             this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "Guardar y subir";
+            this.btnSave.Text = "Guardar ";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -180,11 +181,22 @@
             this.btnAlbumCreator.UseVisualStyleBackColor = true;
             this.btnAlbumCreator.Click += new System.EventHandler(this.btnAlbumCreator_Click);
             // 
+            // chkSubir
+            // 
+            this.chkSubir.AutoSize = true;
+            this.chkSubir.Location = new System.Drawing.Point(255, 148);
+            this.chkSubir.Name = "chkSubir";
+            this.chkSubir.Size = new System.Drawing.Size(50, 17);
+            this.chkSubir.TabIndex = 13;
+            this.chkSubir.Text = "Subir";
+            this.chkSubir.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 179);
+            this.Controls.Add(this.chkSubir);
             this.Controls.Add(this.btnAlbumCreator);
             this.Controls.Add(this.txtServer);
             this.Controls.Add(this.txtPIN);
@@ -225,5 +237,6 @@
         private System.Windows.Forms.TextBox txtPIN;
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.Button btnAlbumCreator;
+        private System.Windows.Forms.CheckBox chkSubir;
     }
 }

@@ -203,13 +203,6 @@ C:\migh.admin\migh.admin\obj\Debug\migh.admin.frmUser.resources
 C:\migh.admin\migh.admin\obj\Debug\migh.admin.csproj.GenerateResource.Cache
 C:\migh.admin\migh.admin\obj\Debug\migh.admin.exe
 C:\migh.admin\migh.admin\obj\Debug\migh.admin.pdb
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\migh.admin.exe
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\migh.admin.pdb
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.dll
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\JsonTools.dll
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\Newtonsoft.Json.dll
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.xml
-C:\GitHub\ghostadmin\migh.admin\bin\Debug\es\Microsoft.QualityTools.Testing.Fakes.resources.dll
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.csprojResolveAssemblyReference.cache
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmAdd_Album.resources
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmAdd_Artist.resources
@@ -229,5 +222,12 @@ C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmMain.resources
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmSong.resources
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmUser.resources
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.csproj.GenerateResource.Cache
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\migh.admin.exe
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\migh.admin.pdb
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.dll
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\JsonTools.dll
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\migh.api.dll
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\Newtonsoft.Json.dll
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.xml
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.exe
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.pdb

@@ -22,13 +22,18 @@ namespace migh.admin
         {
             InitializeComponent();
         }
-
+        public string localLastPath = "";
         private void frmAlbumCreator_Load(object sender, EventArgs e)
         {
             JsonFile file = new JsonFile();
             file.Directory = Application.StartupPath + "\\";
             file.FileName = "gh";
             txtGitHubFolder.Text = file.Read<string>();
+            JsonFile file2 = new JsonFile();
+            file2.Directory = Application.StartupPath + "\\";
+            file2.FileName = "local";
+            localLastPath = file2.Read<string>();
+            folderBrowser.SelectedPath = localLastPath;
         }
         List<string> Covers = new List<string>();
         List<string> Files = new List<string>();
@@ -72,10 +77,29 @@ namespace migh.admin
 	            		}
             			
             			Song song = new Song();
-	
+                        //extras
+                        try
+                        {
+                            song.Track = tagfile.Tag.Track;
+                            song.TrackCount = tagfile.Tag.TrackCount;
+                            song.duration = tagfile.Properties.Duration;
+                            song.JoinedPerformers = tagfile.Tag.JoinedPerformers;
+                            album.year = tagfile.Tag.Year;
+                            album.Disc = tagfile.Tag.Disc;
+                            album.DiscCount = tagfile.Tag.DiscCount;
+                            song.Disc = tagfile.Tag.Disc;
+                            song.DiscCount = tagfile.Tag.DiscCount;
+                            album.JoinedAlbumArtists = tagfile.Tag.JoinedAlbumArtists;
+                        }
+                        catch
+                        {
+
+                        }
+
+                        //
                         if(tagfile.Tag.FirstAlbumArtist == null || tagfile.Tag.FirstAlbumArtist == string.Empty)
                         {
-                        	artist.name = tagfile.Tag.FirstPerformer;
+                            artist.name = tagfile.Tag.FirstPerformer;
                         }
                         else
                         {
@@ -341,30 +365,34 @@ namespace migh.admin
                         }
                     }
                     int i = 0;
-                    foreach (Song s in songs)
+                    if(chkCopiar.Checked)
                     {
-                        Artist a = Artist.get(admin.Library.artist_list, s.artist_id);
-                        Album al = Album.get(admin.Library.album_list, s.album_id);
-                        if (!Directory.Exists(txtGitHubFolder.Text + "\\" + a.url_name))
+                        foreach (Song s in songs)
                         {
-                            Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + a.url_name);
-                        }
-                        if (!Directory.Exists(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name))
-                        {
-                            Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name);
-                        }
-                        
-                        if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\Cover.jpg"))
-                        {
-                        	if (System.IO.File.Exists(Covers[i]))
+                            Artist a = Artist.get(admin.Library.artist_list, s.artist_id);
+                            Album al = Album.get(admin.Library.album_list, s.album_id);
+                            if (!Directory.Exists(txtGitHubFolder.Text + "\\" + a.url_name))
                             {
-                                System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\Cover.jpg");
+                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + a.url_name);
                             }
-                        }
+                            if (!Directory.Exists(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name))
+                            {
+                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name);
+                            }
 
-                        System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\" + s.file_name);
-                    	i++;
+                            if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\Cover.jpg"))
+                            {
+                                if (System.IO.File.Exists(Covers[i]))
+                                {
+                                    System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\Cover.jpg");
+                                }
+                            }
+
+                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\" + s.file_name);
+                            i++;
+                        }
                     }
+                    
                     this.DialogResult = DialogResult.OK;
                 }
                 catch(Exception ex)
@@ -400,7 +428,7 @@ namespace migh.admin
                 {
                     Song song = (Song)listSong.SelectedItem;
                     Album album = Album.get(albums, song.album_id);
-                    if(album == null)
+                    if (album == null)
                     {
                         album = Album.get(admin.Library.album_list, song.album_id);
                     }
@@ -411,35 +439,69 @@ namespace migh.admin
                     }
                     txtName.Text = song.name;
                     txtAlbum.Text = album.name;
-                    txtArtist.Text = artist.name;
+                    txtAlbumArtist.Text = artist.name;
+                    txtArtists.Text = song.JoinedPerformers;
+                    txtTrack.Text = song.Track.ToString();
+                    txtDuration.Text = song.duration.ToString("mm\\:ss");
+                    txtDisc.Text = album.Disc.ToString();
+                    txtDiscCount.Text = album.DiscCount.ToString();
+                    txtTrackCount.Text = song.TrackCount.ToString();
                     txtFile.Text = song.file_name;
                     txtURLName.Text = song.url_name;
-
+                    txtYear.Text = album.year.ToString();
+                    txtDiscTrack.Text = song.Disc.ToString();
+                    txtDiscCountTrack.Text = song.DiscCount.ToString();
                 }
-                catch 
+                catch
                 {
+                    //txtName.Text = "";
+                    //txtAlbum.Text = "";
+                    //txtAlbumArtist.Text = "";
+                    //txtFile.Text = "";
+                    //txtURLName.Text = "";
                     txtName.Text = "";
                     txtAlbum.Text = "";
-                    txtArtist.Text = "";
+                    txtAlbumArtist.Text = "";
+                    txtArtists.Text = "";
+                    txtTrack.Text = "";
+                    txtDuration.Text = "";
+                    txtDisc.Text = "";
+                    txtDiscCount.Text = "";
+                    txtTrackCount.Text = "";
                     txtFile.Text = "";
                     txtURLName.Text = "";
+                    txtDiscTrack.Text = "";
+                    txtDiscCountTrack.Text = "";
                 }
             }
             else
             {
                 txtName.Text = "";
                 txtAlbum.Text = "";
-                txtArtist.Text = "";
+                txtAlbumArtist.Text = "";
+                txtArtists.Text = "";
+                txtTrack.Text = "";
+                txtDuration.Text = "";
+                txtDisc.Text = "";
+                txtDiscCount.Text = "";
+                txtTrackCount.Text = "";
                 txtFile.Text = "";
                 txtURLName.Text = "";
+                txtDiscTrack.Text = "";
+                txtDiscCountTrack.Text = "";
             }
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            folderBrowser.SelectedPath = localLastPath;
             folderBrowser.ShowDialog();
             if(folderBrowser.SelectedPath != string.Empty)
             {
                 txtDirectory.Text = folderBrowser.SelectedPath;
+                JsonFile file = new JsonFile();
+                file.Directory = Application.StartupPath + "\\";
+                file.FileName = "local";
+                JsonFileResponse r = file.Write(txtDirectory.Text.Trim());
             }
         }
         

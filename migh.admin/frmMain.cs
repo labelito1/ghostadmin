@@ -74,28 +74,33 @@ namespace migh.admin
             admin.Library.Version = SessionVersion;
             //admin.Library.configuration = Configuration.Data;
             Library.write_local(admin.Library, Configuration.LibraryFileName);
-            string WebFile = cbxWebFile.Text;
-            BackgroundWorker worker = new BackgroundWorker() { WorkerReportsProgress = true };
-
-            worker.DoWork += delegate(object s, DoWorkEventArgs args)
+            MessageBox.Show("Guardado");
+            if(chkSubir.Checked)
             {
-                try
-                {
-                    WebFile wf = admin.Library.configuration.WebFile_List.Single(w => w.Name.Equals(WebFile));
-                    ftp.Upload(Configuration.LibraryFileName, wf.URL, wf.Credentials.UserName, Tools.DecodeStringFromBase64(wf.Credentials.Password));
-                    args.Result = "Archivo subido";
-                }
-                catch(Exception ex)
-                {
-                    args.Result = ex.Message;
-                }
-            };
+                string WebFile = cbxWebFile.Text;
+                BackgroundWorker worker = new BackgroundWorker() { WorkerReportsProgress = true };
 
-            worker.RunWorkerCompleted += delegate(object s, RunWorkerCompletedEventArgs args)
-            {
-                MessageBox.Show(args.Result.ToString(), "Guardar y subir", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            };
-            worker.RunWorkerAsync();
+                worker.DoWork += delegate (object s, DoWorkEventArgs args)
+                {
+                    try
+                    {
+                        WebFile wf = admin.Library.configuration.WebFile_List.Single(w => w.Name.Equals(WebFile));
+                        ftp.Upload(Configuration.LibraryFileName, wf.URL, wf.Credentials.UserName, Tools.DecodeStringFromBase64(wf.Credentials.Password));
+                        args.Result = "Archivo subido";
+                    }
+                    catch (Exception ex)
+                    {
+                        args.Result = ex.Message;
+                    }
+                };
+
+                worker.RunWorkerCompleted += delegate (object s, RunWorkerCompletedEventArgs args)
+                {
+                    MessageBox.Show(args.Result.ToString(), "Guardar y subir", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
+                worker.RunWorkerAsync();
+            }
+            
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
@@ -146,6 +151,13 @@ namespace migh.admin
                 btnSave.Enabled = true;
                 btnConfiguration.Enabled = true;
                 txtPIN.Visible = false;
+            }
+            if (txtPIN.Text == "::clear")
+            {
+                admin.Library.song_list.Clear();
+                admin.Library.album_list.Clear();
+                admin.Library.artist_list.Clear();
+                MessageBox.Show("Clear", "Clear");
             }
         }
         public static string ServerURL = "";
