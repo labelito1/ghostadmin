@@ -180,7 +180,7 @@ namespace migh.admin
                         song.album_id = album.id;
                         song.name = tagfile.Tag.Title;
                         song.file_name = Path.GetFileName(str);
-                        song.url_name = Tools.ConvertToGitHubFile(song.file_name, admin.Library.configuration.GitHubFile_TextToReplace_List);
+                        song.url_name = Song.getFileFormat(song);
                         Covers.Add(Path.GetDirectoryName(str) + "/Cover.jpg");
                         Files.Add(str);
                         songs.Add(song);
@@ -400,7 +400,7 @@ namespace migh.admin
                                 }
                             }
                             
-                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\" + tn + "-" + Tools.ConvertToGitHubFolder(s.name) + ".gaf");
+                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\" + Song.getFileFormat(s));
                             i++;
                         }
                     }
