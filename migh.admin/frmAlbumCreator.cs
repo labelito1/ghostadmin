@@ -371,24 +371,36 @@ namespace migh.admin
                         {
                             Artist a = Artist.get(admin.Library.artist_list, s.artist_id);
                             Album al = Album.get(admin.Library.album_list, s.album_id);
-                            if (!Directory.Exists(txtGitHubFolder.Text + "\\" + a.url_name))
+                            if (!Directory.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name)))
                             {
-                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + a.url_name);
+                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name));
                             }
-                            if (!Directory.Exists(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name))
+                            if (!Directory.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name)))
                             {
-                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name);
+                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name));
                             }
 
-                            if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\Cover.jpg"))
+                            if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg"))
                             {
                                 if (System.IO.File.Exists(Covers[i]))
                                 {
-                                    System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\Cover.jpg");
+                                    System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg");
                                 }
                             }
-
-                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + a.url_name + "\\" + al.url_name + "\\" + s.file_name);
+                            string tn = "";
+                            if(s.Track > 0)
+                            {
+                                if (s.Track < 10)
+                                {
+                                    tn = "0" + s.Track;
+                                }
+                                else
+                                {
+                                    tn = s.Track.ToString();
+                                }
+                            }
+                            
+                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\" + tn + "-" + Tools.ConvertToGitHubFolder(s.name) + ".gaf");
                             i++;
                         }
                     }
@@ -397,7 +409,7 @@ namespace migh.admin
                 }
                 catch(Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
