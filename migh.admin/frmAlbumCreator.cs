@@ -59,8 +59,8 @@ namespace migh.admin
             		TagLib.File tagfile = TagLib.File.Create(str);
             		try
             		{
-            			if(!System.IO.File.Exists(Path.GetDirectoryName(str) + "/Cover.jpg") || !System.IO.File.Exists(Path.GetDirectoryName(str) + "/CoverSmall.jpg"))
-	                    {
+            			//if(!System.IO.File.Exists(Path.GetDirectoryName(str) + "/Cover.jpg") || !System.IO.File.Exists(Path.GetDirectoryName(str) + "/CoverSmall.jpg"))
+	              //      {
 	            			if (tagfile.Tag.Pictures.Length >= 1)
 	                        {
 	                            var bin = (byte[])(tagfile.Tag.Pictures[0].Data.Data);
@@ -83,7 +83,7 @@ namespace migh.admin
 	                                
 	                            }
 	                        }
-	            		}
+	            		//}
             			
             			Song song = new Song();
                         //extras
