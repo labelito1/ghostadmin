@@ -13,6 +13,7 @@ using TagLib;
 using System.Web;
 using System.Net;
 using JsonTools;
+using System.Drawing.Imaging;
 
 namespace migh.admin
 {
@@ -36,6 +37,7 @@ namespace migh.admin
             folderBrowser.SelectedPath = localLastPath;
         }
         List<string> Covers = new List<string>();
+        List<string> CoversSmall = new List<string>();
         List<string> Files = new List<string>();
         List<Song> songs = new List<Song>();
         List<Album> albums = new List<Album>();
@@ -57,7 +59,7 @@ namespace migh.admin
             		TagLib.File tagfile = TagLib.File.Create(str);
             		try
             		{
-            			if(!System.IO.File.Exists(Path.GetDirectoryName(str) + "/Cover.jpg"))
+            			if(!System.IO.File.Exists(Path.GetDirectoryName(str) + "/Cover.jpg") || !System.IO.File.Exists(Path.GetDirectoryName(str) + "/CoverSmall.jpg"))
 	                    {
 	            			if (tagfile.Tag.Pictures.Length >= 1)
 	                        {
@@ -68,7 +70,14 @@ namespace migh.admin
 	                                {
 	                                    fs.Write(bin, 0, bin.Length);
 	                                }
-	                            }
+                                    Image img;
+                                    using (var ms = new MemoryStream(bin))
+                                    {
+                                         img = Image.FromStream(ms);
+                                    }
+                                    Bitmap bmp = Tools.ResizeImage(img, 150, 150);
+                                    bmp.Save(Path.GetDirectoryName(str) + "/CoverSmall.jpg", ImageFormat.Jpeg);
+                                }
 	                            catch (Exception ex)
 	                            {
 	                                
@@ -182,6 +191,7 @@ namespace migh.admin
                         song.file_name = Path.GetFileName(str);
                         song.url_name = Song.getFileFormat(song);
                         Covers.Add(Path.GetDirectoryName(str) + "/Cover.jpg");
+                        CoversSmall.Add(Path.GetDirectoryName(str) + "/CoverSmall.jpg");
                         Files.Add(str);
                         songs.Add(song);
             		}
@@ -385,6 +395,13 @@ namespace migh.admin
                                 if (System.IO.File.Exists(Covers[i]))
                                 {
                                     System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg");
+                                }
+                            }
+                            if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\CoverSmall.jpg"))
+                            {
+                                if (System.IO.File.Exists(CoversSmall[i]))
+                                {
+                                    System.IO.File.Copy(CoversSmall[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\CoverSmall.jpg");
                                 }
                             }
                             string tn = "";
