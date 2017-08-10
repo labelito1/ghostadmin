@@ -61,28 +61,28 @@ namespace migh.admin
             		{
             			//if(!System.IO.File.Exists(Path.GetDirectoryName(str) + "/Cover.jpg") || !System.IO.File.Exists(Path.GetDirectoryName(str) + "/CoverSmall.jpg"))
 	              //      {
-	            			if (tagfile.Tag.Pictures.Length >= 1)
-	                        {
-	                            var bin = (byte[])(tagfile.Tag.Pictures[0].Data.Data);
-	                            try
-	                            {
-	                                using (var fs = new FileStream(Path.GetDirectoryName(str) + "/Cover.jpg", FileMode.Create, FileAccess.Write))
-	                                {
-	                                    fs.Write(bin, 0, bin.Length);
-	                                }
-                                    Image img;
-                                    using (var ms = new MemoryStream(bin))
-                                    {
-                                         img = Image.FromStream(ms);
-                                    }
-                                    Bitmap bmp = Tools.ResizeImage(img, 150, 150);
-                                    bmp.Save(Path.GetDirectoryName(str) + "/CoverSmall.jpg", ImageFormat.Jpeg);
-                                }
-	                            catch (Exception ex)
-	                            {
+                            //if (tagfile.Tag.Pictures.Length >= 1)
+                            //{
+                            //    var bin = (byte[])(tagfile.Tag.Pictures[0].Data.Data);
+                            //    try
+                            //    {
+                            //        using (var fs = new FileStream(Path.GetDirectoryName(str) + "/Cover.jpg", FileMode.Create, FileAccess.Write))
+                            //        {
+                            //            fs.Write(bin, 0, bin.Length);
+                            //        }
+                            //        Image img;
+                            //        using (var ms = new MemoryStream(bin))
+                            //        {
+                            //             img = Image.FromStream(ms);
+                            //        }
+                            //        Bitmap bmp = Tools.ResizeImage(img, 250, 250);
+                            //        bmp.Save(Path.GetDirectoryName(str) + "/CoverSmall.jpg", ImageFormat.Jpeg);
+                            //    }
+                            //    catch (Exception ex)
+                            //    {
 	                                
-	                            }
-	                        }
+                            //    }
+                            //}
 	            		//}
             			
             			Song song = new Song();
@@ -190,10 +190,37 @@ namespace migh.admin
                         song.name = tagfile.Tag.Title;
                         song.file_name = Path.GetFileName(str);
                         song.url_name = Song.getFileFormat(song);
-                        Covers.Add(Path.GetDirectoryName(str) + "/Cover.jpg");
-                        CoversSmall.Add(Path.GetDirectoryName(str) + "/CoverSmall.jpg");
+                        //Covers.Add(Path.GetDirectoryName(str) + "/Cover.jpg");
+                        //CoversSmall.Add(Path.GetDirectoryName(str) + "/CoverSmall.jpg");
                         Files.Add(str);
                         songs.Add(song);
+                        if (tagfile.Tag.Pictures.Length >= 1)
+                        {
+                            var bin = (byte[])(tagfile.Tag.Pictures[0].Data.Data);
+                            try
+                            {
+                                string filepath = txtGitHubFolder.Text + "/covers/" + Tools.ConvertToGitHubFolder(artist.name) + "/" + Tools.ConvertToGitHubFolder(album.name);
+                                if(!Directory.Exists(filepath))
+                                {
+                                    Directory.CreateDirectory(filepath);
+                                }
+                                using (var fs = new FileStream(filepath + "/Cover.jpg", FileMode.Create, FileAccess.Write))
+                                {
+                                    fs.Write(bin, 0, bin.Length);
+                                }
+                                Image img;
+                                using (var ms = new MemoryStream(bin))
+                                {
+                                    img = Image.FromStream(ms);
+                                }
+                                Bitmap bmp = Tools.ResizeImage(img, 250, 250);
+                                bmp.Save(filepath + "/CoverSmall.jpg", ImageFormat.Jpeg);
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
             		}
             		catch(Exception ex)
             		{
@@ -390,20 +417,20 @@ namespace migh.admin
                                 Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name));
                             }
 
-                            if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg"))
-                            {
-                                if (System.IO.File.Exists(Covers[i]))
-                                {
-                                    System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg");
-                                }
-                            }
-                            if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\CoverSmall.jpg"))
-                            {
-                                if (System.IO.File.Exists(CoversSmall[i]))
-                                {
-                                    System.IO.File.Copy(CoversSmall[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\CoverSmall.jpg");
-                                }
-                            }
+                            //if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg"))
+                            //{
+                            //    if (System.IO.File.Exists(Covers[i]))
+                            //    {
+                            //        System.IO.File.Copy(Covers[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg");
+                            //    }
+                            //}
+                            //if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\CoverSmall.jpg"))
+                            //{
+                            //    if (System.IO.File.Exists(CoversSmall[i]))
+                            //    {
+                            //        System.IO.File.Copy(CoversSmall[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\CoverSmall.jpg");
+                            //    }
+                            //}
                             string tn = "";
                             if(s.Track > 0)
                             {

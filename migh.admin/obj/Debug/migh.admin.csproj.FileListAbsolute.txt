@@ -231,3 +231,7 @@ C:\GitHub\ghostadmin\migh.admin\bin\Debug\Newtonsoft.Json.dll
 C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.xml
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.exe
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.pdb
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.fakesconfig
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
+C:\GitHub\ghostadmin\migh.admin\bin\Debug\es\Microsoft.QualityTools.Testing.Fakes.resources.dll
+C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.csprojFakesResolveAssemblyReference.cache
