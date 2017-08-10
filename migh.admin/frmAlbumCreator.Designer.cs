@@ -64,6 +64,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnStruct = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -373,11 +374,22 @@
             this.label12.TabIndex = 41;
             this.label12.Text = "Disc";
             // 
+            // btnStruct
+            // 
+            this.btnStruct.Location = new System.Drawing.Point(334, 336);
+            this.btnStruct.Name = "btnStruct";
+            this.btnStruct.Size = new System.Drawing.Size(58, 23);
+            this.btnStruct.TabIndex = 42;
+            this.btnStruct.Text = "...";
+            this.btnStruct.UseVisualStyleBackColor = true;
+            this.btnStruct.Click += new System.EventHandler(this.btnStruct_Click);
+            // 
             // frmAlbumCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 371);
+            this.Controls.Add(this.btnStruct);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtDiscCountTrack);
@@ -462,5 +474,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnStruct;
     }
 }

@@ -575,5 +575,22 @@ namespace migh.admin
                 }
             }
         }
+
+        private void btnStruct_Click(object sender, EventArgs e)
+        {
+            folderBrowser.ShowDialog();
+            if(folderBrowser.SelectedPath != "")
+            {
+                foreach(Album album in admin.Library.album_list)
+                {
+                    Artist artist = admin.Library.artist_list.FirstOrDefault(a => a.id == album.artist_id);
+                    string dir = folderBrowser.SelectedPath + "/" + Tools.ConvertToGitHubFolder(artist.name) + "/" + Tools.ConvertToGitHubFolder(album.name);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                }
+            }
+        }
     }
 }
