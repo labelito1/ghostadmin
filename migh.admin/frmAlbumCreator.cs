@@ -416,7 +416,11 @@ namespace migh.admin
                             {
                                 Directory.CreateDirectory(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name));
                             }
-
+                            //opus
+                            if (!Directory.Exists(txtGitHubFolder.Text + "\\opus\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name)))
+                            {
+                                Directory.CreateDirectory(txtGitHubFolder.Text + "\\opus\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name));
+                            }
                             //if (!System.IO.File.Exists(txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\Cover.jpg"))
                             //{
                             //    if (System.IO.File.Exists(Covers[i]))
