@@ -31,12 +31,12 @@ namespace migh.admin
             if (listArtist.SelectedItems.Count > 0)
             {
                 btnDeleteArtist.Enabled = true;
-                btnEditArtist.Enabled = true;
+                //btnEditArtist.Enabled = true;
             }
             else
             {
                 btnDeleteArtist.Enabled = false;
-                btnEditArtist.Enabled = false;
+                //btnEditArtist.Enabled = false;
             }
         }
 
@@ -107,11 +107,17 @@ namespace migh.admin
                 Artist artist = (Artist)listArtist.SelectedItems[0].Tag;
                 if(Artist.has_children(admin.Library.album_list, artist.id))
                 {
-                    MessageBox.Show(artist.name + " tiene álbumes registrados", "Eliminar Artista", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    if(MessageBox.Show(artist.name + " tiene álbumes registrados. ¿Desea eliminarlos?", "Eliminar Artista", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        admin.Library.song_list.RemoveAll(s => s.artist_id == artist.id);
+                        admin.Library.album_list.RemoveAll(a => a.artist_id == artist.id);
+                        admin.Library.artist_list.RemoveAll(a => a.id == artist.id);
+                        RefreshList();
+                    }
                 }
                 else
                 {
-                    Artist.remove(ref admin.Library.artist_list, artist.id);
+                    admin.Library.artist_list.RemoveAll(a => a.id == artist.id);
                     RefreshList();
                 }
             }

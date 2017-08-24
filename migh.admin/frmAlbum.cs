@@ -90,12 +90,12 @@ namespace migh.admin
             if (listAlbum.SelectedItems.Count > 0)
             {
                 btnDeleteAlbum.Enabled = true;
-                btnEditAlbum.Enabled = true;
+                //btnEditAlbum.Enabled = true;
             }
             else
             {
                 btnDeleteAlbum.Enabled = false;
-                btnEditAlbum.Enabled = false;
+                //btnEditAlbum.Enabled = false;
             }
         }
 
@@ -152,11 +152,16 @@ namespace migh.admin
                 Album album = (Album)listAlbum.SelectedItems[0].Tag;
                 if (Album.has_children(admin.Library.song_list, album.id))
                 {
-                    MessageBox.Show(album.name + " tiene canciones registradas", "Eliminar Álbum", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    if(MessageBox.Show(album.name + " tiene canciones registradas. ¿Desea eliminarlas?", "Eliminar Álbum", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        admin.Library.song_list.RemoveAll(s => s.album_id == album.id);
+                        admin.Library.album_list.RemoveAll(a => a.id == album.id);
+                        RefreshList();
+                    }
                 }
                 else
                 {
-                    Album.remove(ref admin.Library.album_list, album.id);
+                    admin.Library.album_list.RemoveAll(a => a.id == album.id);
                     RefreshList();
                 }
             }

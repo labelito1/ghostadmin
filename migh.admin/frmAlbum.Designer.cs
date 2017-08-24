@@ -56,6 +56,7 @@
             // btnEditAlbum
             // 
             this.btnEditAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditAlbum.Enabled = false;
             this.btnEditAlbum.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnEditAlbum.Location = new System.Drawing.Point(93, 273);
             this.btnEditAlbum.Name = "btnEditAlbum";
@@ -68,6 +69,7 @@
             // btnAddAlbum
             // 
             this.btnAddAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddAlbum.Enabled = false;
             this.btnAddAlbum.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddAlbum.Location = new System.Drawing.Point(12, 273);
             this.btnAddAlbum.Name = "btnAddAlbum";

@@ -65,16 +65,17 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.btnStruct = new System.Windows.Forms.Button();
+            this.txtAlbumId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(16, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Carpeta";
+            this.label1.Text = "Fuente";
             // 
             // txtDirectory
             // 
@@ -211,14 +212,18 @@
             this.btnSelectMusicFolder.UseVisualStyleBackColor = true;
             this.btnSelectMusicFolder.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // folderBrowser
+            // 
+            this.folderBrowser.ShowNewFolderButton = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 41);
+            this.label2.Location = new System.Drawing.Point(13, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 23;
-            this.label2.Text = "GitHub";
+            this.label2.Text = "Destino";
             // 
             // txtGitHubFolder
             // 
@@ -241,6 +246,8 @@
             // chkCopiar
             // 
             this.chkCopiar.AutoSize = true;
+            this.chkCopiar.Checked = true;
+            this.chkCopiar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCopiar.Location = new System.Drawing.Point(530, 313);
             this.chkCopiar.Name = "chkCopiar";
             this.chkCopiar.Size = new System.Drawing.Size(56, 17);
@@ -384,11 +391,20 @@
             this.btnStruct.UseVisualStyleBackColor = true;
             this.btnStruct.Click += new System.EventHandler(this.btnStruct_Click);
             // 
+            // txtAlbumId
+            // 
+            this.txtAlbumId.Location = new System.Drawing.Point(444, 135);
+            this.txtAlbumId.Name = "txtAlbumId";
+            this.txtAlbumId.ReadOnly = true;
+            this.txtAlbumId.Size = new System.Drawing.Size(68, 20);
+            this.txtAlbumId.TabIndex = 43;
+            // 
             // frmAlbumCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 371);
+            this.Controls.Add(this.txtAlbumId);
             this.Controls.Add(this.btnStruct);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -429,6 +445,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAlbumCreator";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAlbumCreator";
             this.Load += new System.EventHandler(this.frmAlbumCreator_Load);
             this.ResumeLayout(false);
@@ -475,5 +492,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnStruct;
+        private System.Windows.Forms.TextBox txtAlbumId;
     }
 }

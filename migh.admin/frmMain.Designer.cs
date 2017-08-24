@@ -92,7 +92,7 @@
             // 
             this.btnSave.Enabled = false;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnSave.Location = new System.Drawing.Point(255, 117);
+            this.btnSave.Location = new System.Drawing.Point(255, 146);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 21);
             this.btnSave.TabIndex = 4;
@@ -165,10 +165,12 @@
             // 
             // txtServer
             // 
+            this.txtServer.Enabled = false;
             this.txtServer.Location = new System.Drawing.Point(13, 42);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(317, 20);
             this.txtServer.TabIndex = 11;
+            this.txtServer.Visible = false;
             this.txtServer.TextChanged += new System.EventHandler(this.txtServer_TextChanged);
             // 
             // btnAlbumCreator
@@ -184,11 +186,11 @@
             // chkSubir
             // 
             this.chkSubir.AutoSize = true;
-            this.chkSubir.Location = new System.Drawing.Point(255, 148);
+            this.chkSubir.Location = new System.Drawing.Point(270, 121);
             this.chkSubir.Name = "chkSubir";
-            this.chkSubir.Size = new System.Drawing.Size(50, 17);
+            this.chkSubir.Size = new System.Drawing.Size(46, 17);
             this.chkSubir.TabIndex = 13;
-            this.chkSubir.Text = "Subir";
+            this.chkSubir.Text = "FTP";
             this.chkSubir.UseVisualStyleBackColor = true;
             // 
             // frmMain
@@ -216,6 +218,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -49,7 +49,7 @@
             // 
             this.btnDeleteSong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteSong.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDeleteSong.Location = new System.Drawing.Point(174, 332);
+            this.btnDeleteSong.Location = new System.Drawing.Point(174, 338);
             this.btnDeleteSong.Name = "btnDeleteSong";
             this.btnDeleteSong.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteSong.TabIndex = 23;
@@ -60,8 +60,9 @@
             // btnEditSong
             // 
             this.btnEditSong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditSong.Enabled = false;
             this.btnEditSong.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnEditSong.Location = new System.Drawing.Point(93, 332);
+            this.btnEditSong.Location = new System.Drawing.Point(93, 338);
             this.btnEditSong.Name = "btnEditSong";
             this.btnEditSong.Size = new System.Drawing.Size(75, 23);
             this.btnEditSong.TabIndex = 22;
@@ -72,8 +73,9 @@
             // btnAddSong
             // 
             this.btnAddSong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddSong.Enabled = false;
             this.btnAddSong.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAddSong.Location = new System.Drawing.Point(12, 332);
+            this.btnAddSong.Location = new System.Drawing.Point(12, 338);
             this.btnAddSong.Name = "btnAddSong";
             this.btnAddSong.Size = new System.Drawing.Size(75, 23);
             this.btnAddSong.TabIndex = 21;
@@ -101,7 +103,7 @@
             this.listSong.FullRowSelect = true;
             this.listSong.Location = new System.Drawing.Point(12, 59);
             this.listSong.Name = "listSong";
-            this.listSong.Size = new System.Drawing.Size(625, 267);
+            this.listSong.Size = new System.Drawing.Size(635, 273);
             this.listSong.TabIndex = 19;
             this.listSong.UseCompatibleStateImageBehavior = false;
             this.listSong.View = System.Windows.Forms.View.Details;
@@ -130,7 +132,7 @@
             this.cbxSongAlbum.FormattingEnabled = true;
             this.cbxSongAlbum.Location = new System.Drawing.Point(320, 6);
             this.cbxSongAlbum.Name = "cbxSongAlbum";
-            this.cbxSongAlbum.Size = new System.Drawing.Size(317, 21);
+            this.cbxSongAlbum.Size = new System.Drawing.Size(327, 21);
             this.cbxSongAlbum.TabIndex = 18;
             this.cbxSongAlbum.SelectedIndexChanged += new System.EventHandler(this.cbxSongAlbum_SelectedIndexChanged);
             // 
@@ -177,7 +179,7 @@
             // 
             this.btnAlbumCreator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAlbumCreator.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAlbumCreator.Location = new System.Drawing.Point(537, 332);
+            this.btnAlbumCreator.Location = new System.Drawing.Point(547, 338);
             this.btnAlbumCreator.Name = "btnAlbumCreator";
             this.btnAlbumCreator.Size = new System.Drawing.Size(100, 23);
             this.btnAlbumCreator.TabIndex = 25;
@@ -187,7 +189,8 @@
             // 
             // btnUpgrade
             // 
-            this.btnUpgrade.Location = new System.Drawing.Point(456, 332);
+            this.btnUpgrade.Enabled = false;
+            this.btnUpgrade.Location = new System.Drawing.Point(466, 338);
             this.btnUpgrade.Name = "btnUpgrade";
             this.btnUpgrade.Size = new System.Drawing.Size(75, 23);
             this.btnUpgrade.TabIndex = 26;
@@ -199,7 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 367);
+            this.ClientSize = new System.Drawing.Size(659, 373);
             this.Controls.Add(this.btnUpgrade);
             this.Controls.Add(this.btnAlbumCreator);
             this.Controls.Add(this.label9);

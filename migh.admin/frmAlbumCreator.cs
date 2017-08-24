@@ -35,6 +35,7 @@ namespace migh.admin
             file2.FileName = "local";
             localLastPath = file2.Read<string>();
             folderBrowser.SelectedPath = localLastPath;
+            txtDirectory.Text = localLastPath;
         }
         List<string> Covers = new List<string>();
         List<string> CoversSmall = new List<string>();
@@ -45,17 +46,23 @@ namespace migh.admin
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            songs.Clear();
+            albums.Clear();
+            artists.Clear();
             listSong.Items.Clear();
             string directory = txtDirectory.Text.Trim();
-            songs = new List<Song>();
-            Album album = new Album();
-            Artist artist = new Artist();
+            //songs = new List<Song>();
+            Album album;
+            Artist artist;
             string path = txtDirectory.Text.Trim();
-            var d = Directory.GetFiles(path, "*.*", System.IO.SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".m4a")); 
+            
             try
             {
+                var d = Directory.GetFiles(path, "*.*", System.IO.SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".m4a")); 
             	foreach(string str in d)
             	{
+                    artist = new Artist();
+                    album = new Album();
             		TagLib.File tagfile = TagLib.File.Create(str);
             		try
             		{
@@ -130,11 +137,29 @@ namespace migh.admin
                             else
                             {
                                 artist.url_name = Tools.ConvertToGitHubFolder(artist.name);
-                                while (Artist.id_exists(admin.Library.artist_list, artist.id))
+                                List<int> artist_ids = new List<int>();
+                                foreach (Artist ar in admin.Library.artist_list)
+                                {
+                                    artist_ids.Add(ar.id);
+                                }
+                                foreach (Artist ar2 in artists)
+                                {
+                                    artist_ids.Add(ar2.id);
+                                }
+                                while (artist_ids.Contains(artist.id))
                                 {
                                     artist.id++;
                                 }
-                                artists.Add(artist);
+                                Artist _artist = admin.Library.artist_list.FirstOrDefault(a => a.id == artist.id && a.name.ToLower().Equals(artist.name.ToLower()));
+                                if (_artist == null)
+                                {
+                                    _artist = artists.FirstOrDefault(a => a.id == artist.id && a.name.ToLower().Equals(artist.name.ToLower()));
+                                }
+                                if (_artist == null)
+                                {
+                                    artists.Add(artist);
+                                }
+                                
                             }
                         }
                         
@@ -157,11 +182,30 @@ namespace migh.admin
                                 album.artist_id = artist.id;
                                 album.cover_url = string.Format(admin.Library.configuration.AlbumCoverImageFileURLFormat, artist.url_name, album.url_name);
                                 album.url_name = Tools.ConvertToGitHubFolder(album.name);
-                                while (Album.id_exists(admin.Library.album_list, album.id))
+
+                                List<int> album_ids = new List<int>();
+                                foreach (Album al in admin.Library.album_list)
+                                {
+                                    album_ids.Add(al.id);
+                                }
+                                foreach (Album al2 in albums)
+                                {
+                                    album_ids.Add(al2.id);
+                                }
+                                while (album_ids.Contains(album.id))
                                 {
                                     album.id++;
                                 }
-                                albums.Add(album);
+                                Album _album = admin.Library.album_list.FirstOrDefault(a => a.artist_id == album.artist_id && a.id == album.id && a.name.ToLower().Equals(album.name.ToLower()));
+                                if (_album == null)
+                                {
+                                    _album = albums.FirstOrDefault(a => a.artist_id == album.artist_id && a.id == album.id && a.name.ToLower().Equals(album.name.ToLower()));
+                                }
+                                if (_album == null)
+                                {
+                                    albums.Add(album);
+                                }
+                                
                             }
                         }
                         List<int> ids = new List<int>();
@@ -193,7 +237,16 @@ namespace migh.admin
                         //Covers.Add(Path.GetDirectoryName(str) + "/Cover.jpg");
                         //CoversSmall.Add(Path.GetDirectoryName(str) + "/CoverSmall.jpg");
                         Files.Add(str);
-                        songs.Add(song);
+                        Song _song = admin.Library.song_list.FirstOrDefault(s => s.artist_id == song.artist_id && s.album_id == song.album_id && s.name.ToLower().Equals(song.name.ToLower()));
+                        if(_song == null)
+                        {
+                            _song = songs.FirstOrDefault(s => s.artist_id == song.artist_id && s.album_id == song.album_id && s.name.ToLower().Equals(song.name.ToLower()));
+                        }
+                        if(_song == null)
+                        {
+                            songs.Add(song);
+                        }
+                        
                         if (tagfile.Tag.Pictures.Length >= 1)
                         {
                             var bin = (byte[])(tagfile.Tag.Pictures[0].Data.Data);
@@ -461,9 +514,7 @@ namespace migh.admin
                 }
                 finally
                 {
-                    songs.Clear();
-                    albums.Clear();
-                    artists.Clear();
+                    
                 }
             }
         }
@@ -511,6 +562,7 @@ namespace migh.admin
                     txtYear.Text = album.year.ToString();
                     txtDiscTrack.Text = song.Disc.ToString();
                     txtDiscCountTrack.Text = song.DiscCount.ToString();
+                    txtAlbumId.Text = album.id.ToString();
                 }
                 catch
                 {
@@ -532,6 +584,7 @@ namespace migh.admin
                     txtURLName.Text = "";
                     txtDiscTrack.Text = "";
                     txtDiscCountTrack.Text = "";
+                    txtAlbumId.Text = "";
                 }
             }
             else
@@ -549,25 +602,31 @@ namespace migh.admin
                 txtURLName.Text = "";
                 txtDiscTrack.Text = "";
                 txtDiscCountTrack.Text = "";
+                txtAlbumId.Text = "";
             }
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            
             folderBrowser.SelectedPath = localLastPath;
-            folderBrowser.ShowDialog();
-            if(folderBrowser.SelectedPath != string.Empty)
+            //folderBrowser.RootFolder = Environment.SpecialFolder.MyDocuments;
+            if(folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                txtDirectory.Text = folderBrowser.SelectedPath;
-                JsonFile file = new JsonFile();
-                file.Directory = Application.StartupPath + "\\";
-                file.FileName = "local";
-                JsonFileResponse r = file.Write(txtDirectory.Text.Trim());
+                if (folderBrowser.SelectedPath != string.Empty)
+                {
+                    txtDirectory.Text = folderBrowser.SelectedPath;
+                    JsonFile file = new JsonFile();
+                    file.Directory = Application.StartupPath + "\\";
+                    file.FileName = "local";
+                    JsonFileResponse r = file.Write(txtDirectory.Text.Trim());
+                }
             }
+            
         }
         
         private void btnSelectGitHubFolder_Click(object sender, EventArgs e)
         {
-            folderBrowser.ShowDialog();
+            if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if(folderBrowser.SelectedPath != string.Empty)
                 {
@@ -582,16 +641,18 @@ namespace migh.admin
 
         private void btnStruct_Click(object sender, EventArgs e)
         {
-            folderBrowser.ShowDialog();
-            if(folderBrowser.SelectedPath != "")
+            if(folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                foreach(Album album in admin.Library.album_list)
+                if(folderBrowser.SelectedPath != "")
                 {
-                    Artist artist = admin.Library.artist_list.FirstOrDefault(a => a.id == album.artist_id);
-                    string dir = folderBrowser.SelectedPath + "/" + Tools.ConvertToGitHubFolder(artist.name) + "/" + Tools.ConvertToGitHubFolder(album.name);
-                    if (!Directory.Exists(dir))
+                    foreach(Album album in admin.Library.album_list)
                     {
-                        Directory.CreateDirectory(dir);
+                        Artist artist = admin.Library.artist_list.FirstOrDefault(a => a.id == album.artist_id);
+                        string dir = folderBrowser.SelectedPath + "/" + Tools.ConvertToGitHubFolder(artist.name) + "/" + Tools.ConvertToGitHubFolder(album.name);
+                        if (!Directory.Exists(dir))
+                        {
+                            Directory.CreateDirectory(dir);
+                        }
                     }
                 }
             }

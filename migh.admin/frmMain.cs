@@ -75,12 +75,12 @@ namespace migh.admin
             //admin.Library.configuration = Configuration.Data;
             Library.write_local(admin.Library, Configuration.LibraryFileName);
             MessageBox.Show("Guardado");
-            if(chkSubir.Checked)
+            if (chkSubir.Checked)
             {
                 string WebFile = cbxWebFile.Text;
                 BackgroundWorker worker = new BackgroundWorker() { WorkerReportsProgress = true };
 
-                worker.DoWork += delegate (object s, DoWorkEventArgs args)
+                worker.DoWork += delegate(object s, DoWorkEventArgs args)
                 {
                     try
                     {
@@ -94,7 +94,7 @@ namespace migh.admin
                     }
                 };
 
-                worker.RunWorkerCompleted += delegate (object s, RunWorkerCompletedEventArgs args)
+                worker.RunWorkerCompleted += delegate(object s, RunWorkerCompletedEventArgs args)
                 {
                     MessageBox.Show(args.Result.ToString(), "Guardar y subir", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 };
@@ -170,6 +170,12 @@ namespace migh.admin
         {
             frmAlbumCreator frm = new frmAlbumCreator();
             frm.ShowDialog();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var window = MessageBox.Show("¿Salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            e.Cancel = window == System.Windows.Forms.DialogResult.No;
         }
     }
 }

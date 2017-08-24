@@ -30,12 +30,12 @@ namespace migh.admin
             if (listSong.SelectedItems.Count > 0)
             {
                 btnDeleteSong.Enabled = true;
-                btnEditSong.Enabled = true;
+                //btnEditSong.Enabled = true;
             }
             else
             {
                 btnDeleteSong.Enabled = false;
-                btnEditSong.Enabled = false;
+                //btnEditSong.Enabled = false;
             }
         }
 
@@ -232,7 +232,7 @@ namespace migh.admin
                     foreach(ListViewItem item in listSong.SelectedItems)
                     {
                         Song song = (Song)item.Tag;
-                        Song.remove(ref admin.Library.song_list, song.id);
+                        admin.Library.song_list.RemoveAll(s => s.id == song.id);
                     }
                 }
                 catch

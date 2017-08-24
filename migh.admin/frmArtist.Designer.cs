@@ -53,6 +53,7 @@
             // btnEditArtist
             // 
             this.btnEditArtist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditArtist.Enabled = false;
             this.btnEditArtist.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnEditArtist.Location = new System.Drawing.Point(93, 293);
             this.btnEditArtist.Name = "btnEditArtist";
@@ -65,6 +66,7 @@
             // btnAddArtist
             // 
             this.btnAddArtist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddArtist.Enabled = false;
             this.btnAddArtist.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAddArtist.Location = new System.Drawing.Point(12, 293);
             this.btnAddArtist.Name = "btnAddArtist";
