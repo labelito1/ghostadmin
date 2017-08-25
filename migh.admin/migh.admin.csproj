@@ -44,8 +44,7 @@
       <HintPath>..\JsonTools.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="migh.api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="migh.api">
       <HintPath>..\migh.api.dll</HintPath>
     </Reference>
     <Reference Include="simple.ftp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
