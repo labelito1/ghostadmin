@@ -340,8 +340,8 @@ namespace migh.admin
                                     tn = s.Track.ToString();
                                 }
                             }
-                            
-                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\" + Song.getFileFormat(s));
+
+                            System.IO.File.Copy(Files[i], txtGitHubFolder.Text + "\\" + Tools.ConvertToGitHubFolder(a.name) + "\\" + Tools.ConvertToGitHubFolder(al.name) + "\\" + Song.getFileFormat(s) + Path.GetExtension(Files[i]));
                             i++;
                         }
                     }

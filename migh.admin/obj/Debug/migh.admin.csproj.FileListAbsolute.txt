@@ -213,7 +213,6 @@ C:\GitHub\ghostadmin\migh.admin\bin\Debug\migh.api.dll
 C:\GitHub\ghostadmin\migh.admin\bin\Debug\Newtonsoft.Json.dll
 C:\GitHub\ghostadmin\migh.admin\bin\Debug\ICSharpCode.SharpZipLib.Fakes.xml
 C:\GitHub\ghostadmin\migh.admin\bin\Debug\es\Microsoft.QualityTools.Testing.Fakes.resources.dll
-C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.csprojFakesResolveAssemblyReference.cache
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmAdd_Album.resources
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmAdd_Artist.resources
 C:\GitHub\ghostadmin\migh.admin\obj\Debug\migh.admin.frmAdd_Song.resources
