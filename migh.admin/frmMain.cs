@@ -123,21 +123,35 @@ namespace migh.admin
             File.WriteAllText(Environment.CurrentDirectory + "/ghost-artists.json", artist_list.OrderBy(a => a.name).ToJsonString());
 
             List<newAlbum> album_list = new List<newAlbum>();
-            foreach (Album alb in admin.Library.album_list)
+            
+            foreach (Artist _art in admin.Library.artist_list)
             {
-                newAlbum newalb = new newAlbum();
-                Artist art = admin.Library.artist_list.FirstOrDefault(ar => ar.id == alb.artist_id);
-                newalb.id = alb.id;
-                newalb.title = alb.name;
-                newalb.artist = art.name;
-                newalb.cover = string.Format(admin.Library.configuration.AlbumCoverImageFileURLFormat, Tools.ConvertToGitHubFolder(art.name), Tools.ConvertToGitHubFolder(alb.name));
-                newalb.cover_small = string.Format(admin.Library.configuration.AlbumCoverImageFileURLFormat.Replace("Cover.jpg", "CoverSmall.jpg"), Tools.ConvertToGitHubFolder(art.name), Tools.ConvertToGitHubFolder(alb.name));
-                newalb.year = Convert.ToInt32(alb.year);
-                newalb.artist_id = alb.artist_id;
-                album_list.Add(newalb);
+                List<Album> albums = admin.Library.album_list.Where(_a_ => _a_.artist_id == _art.id).ToList<Album>();
+                List<newAlbum> x = new List<newAlbum>();
+                foreach (Album alb in albums)
+                {
+                    newAlbum newalb = new newAlbum();
+                    Artist art = admin.Library.artist_list.FirstOrDefault(ar => ar.id == alb.artist_id);
+
+
+                    newalb.id = alb.id;
+                    newalb.title = alb.name;
+                    newalb.artist = art.name;
+                    newalb.cover = string.Format(admin.Library.configuration.AlbumCoverImageFileURLFormat, Tools.ConvertToGitHubFolder(art.name), Tools.ConvertToGitHubFolder(alb.name));
+                    newalb.cover_small = string.Format(admin.Library.configuration.AlbumCoverImageFileURLFormat.Replace("Cover.jpg", "CoverSmall.jpg"), Tools.ConvertToGitHubFolder(art.name), Tools.ConvertToGitHubFolder(alb.name));
+                    newalb.year = Convert.ToInt32(alb.year);
+                    newalb.artist_id = alb.artist_id;
+                    x.Add(newalb);
+                }
+                x = x.OrderByDescending(xd => xd.year).ToList<newAlbum>();
+                foreach (newAlbum tal in x)
+                {
+                    album_list.Add(tal);
+                }
             }
 
-            File.WriteAllText(Environment.CurrentDirectory + "/ghost-albums.json", album_list.OrderByDescending(a => a.year).ToJsonString());
+            int ab = 1;
+            File.WriteAllText(Environment.CurrentDirectory + "/ghost-albums.json", album_list.ToJsonString());
 
             List<newTrack> track_list = new List<newTrack>();
             foreach (Song sng in admin.Library.song_list)
