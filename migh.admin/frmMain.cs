@@ -162,7 +162,7 @@ namespace migh.admin
                 newt.id = sng.id;
                 newt.title = sng.name;
                 newt.artist = art.name;
-                newt.JoinedPerformers = sng.JoinedPerformers;
+                newt.JoinedPerformers = sng.JoinedPerformers.Replace(";", ",");
                 newt.album = alb.name;
                 newt.duration = sng.duration.ToString("mm\\:ss");
                 newt.tracknumber = Convert.ToInt32(sng.Track);
